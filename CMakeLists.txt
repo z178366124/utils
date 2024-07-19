@@ -2,6 +2,7 @@ cmake_minimum_required( VERSION 3.4 )
 project( rbtree )
 
 
+set(CMAKE_BUILD_TYPE Debug)
 
 add_executable(rbtree main.c ${PROJECT_SOURCE_DIR}/timelib/timelib.c)
 
