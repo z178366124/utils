@@ -1,6 +1,9 @@
 {
     "files.associations": {
         "timelib.h": "c",
-        "time.h": "c"
+        "time.h": "c",
+        "plugin_parse.h": "c",
+        "stdlib.h": "c",
+        "type_traits": "c"
     }
 }

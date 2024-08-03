@@ -1,0 +1,32 @@
+plugin:
+    name: 插件
+    so_dir: 动态库路径
+    so_name: 动态库文件名
+    open: true
+    description: 核心功能，用于所有功能的集成
+    config:
+        file:
+            - a.txt
+            - b.txt
+        sql:
+            - database: /usr/local/db
+              sql_cmd: logrsv
+              check_fun: check
+            - database: /usr/local/db
+              sql_cmd: logrsv
+              check_fun: check
+    hooks:
+        - hook_name: read_log
+          hook_description: 钩子功能
+          is_use: true
+    register_hooks:
+        - plugin_name: read_log
+          hook_name: read_data
+          is_use: true
+          func_name: t
+          priority: 1
+          func_description: 函数功能
+    init_fun: 初始化函数可以为空（0）
+    run_func: 插件功能函数，以独立线程运行启动，可以为空（0）
+    destory_fun: 插件销毁函数，可以为空（0）
+    reset_fun: 插件重启函数，可以为空（0）

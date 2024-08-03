@@ -5,7 +5,23 @@
 #include "list.h"
 #include "rbtree.h"
 
-typedef void * (*plugin_funnc_t)(void*);
+typedef void* (*plugin_funnc_t)(void*, void*);
+
+typedef struct plugin_task_s plugin_task_t;
+
+typedef struct hook_func_s{  // 钩子中每个函数信息
+    plugin_task_t *p_plugin_task;
+    char name[64];  // 插件名 唯一
+    char description[256];      // 插件描述
+    void* (*func)(void*, void*);
+    struct hook_func_s *next;
+}hook_func_t;
+
+typedef struct hook_node_s{ // 钩子信息，每一个钩子存在多个钩子函数
+    char name[64];  // 插件名 唯一
+    char description[256];      // 插件描述
+    list_t *hook_func_list; // node 为 hook_func_s
+}hook_node_t;
 
 typedef struct plugin_task_s{
     char name[64];  // 插件名 唯一
@@ -20,6 +36,7 @@ typedef struct plugin_task_s{
     plugin_funnc_t reset_fun;   // 插件重启函数
 
     list_t *plugin_hook; // 插件钩子 链表
+    // plugin链表，node 为 hook_node_t
     pthread_mutex_t plugin_task_lock;
 }plugin_task_t;
 
